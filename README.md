@@ -32,7 +32,7 @@ func main() {
 	// HangZhou         = "oss-cn-hangzhou"
 	// QingDao          = "oss-cn-qingdao"
 	// HangZhouInternal = "oss-cn-hangzhou-internal"
-	// QingdaoInternal  = "oss-cn-qingdao-internal"
+	// QingDaoInternal  = "oss-cn-qingdao-internal"
 	// DefaultRegion    = "oss"
 	o := oss.New(oss.DefaultRegion, accessId, accessKey)
 

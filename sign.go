@@ -12,9 +12,8 @@ import (
 var b64 = base64.StdEncoding
 
 // ----------------------------------------------------------------------------
-// S3 signing (http://goo.gl/G1LrK)
 
-var s3ParamsToSign = map[string]bool{
+var paramsToSign = map[string]bool{
 	"acl":                          true,
 	"location":                     true,
 	"logging":                      true,
@@ -77,7 +76,7 @@ func sign(auth Auth, method, canonicalPath string, params, headers map[string][]
 
 	sarray = sarray[0:0]
 	for k, v := range params {
-		if s3ParamsToSign[k] {
+		if paramsToSign[k] {
 			for _, vi := range v {
 				if vi == "" {
 					sarray = append(sarray, k)
