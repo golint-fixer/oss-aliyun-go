@@ -68,4 +68,3 @@ func main() {
 
 licensed under the LGPL
 
-#### Status: Under Developing
