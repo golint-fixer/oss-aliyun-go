@@ -19,7 +19,7 @@ package main
 import (
 	"log"
 
-	"github.com/Pinidea/oss-aliyun-go"
+	"github.com/PinIdea/oss-aliyun-go"
 )
 
 func main() {
