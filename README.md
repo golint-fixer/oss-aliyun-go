@@ -1,4 +1,7 @@
-## aliyun SDK for Go language [![GoDoc](http://godoc.org/github.com/PinIdea/oss-aliyun-go?status.png)](http://godoc.org/github.com/PinIdea/oss-aliyun-go/)
+## aliyun SDK for Go language 
+
+[![Build Status](https://travis-ci.org/PinIdea/oss-aliyun-go.svg?branch=master)](https://travis-ci.org/PinIdea/oss-aliyun-go)
+[![GoDoc](http://godoc.org/github.com/PinIdea/oss-aliyun-go?status.png)](http://godoc.org/github.com/PinIdea/oss-aliyun-go/)
 
 ### Build and Install 
 
