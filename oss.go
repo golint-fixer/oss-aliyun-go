@@ -1,6 +1,10 @@
 //
 // oss-aliyun-go - Go packages to interact with the Open Storage Service.
 //
+//   https://wiki.ubuntu.com/goamz
+//
+// Copyright (c) 2011 Canonical Ltd.
+//
 
 package oss
 
