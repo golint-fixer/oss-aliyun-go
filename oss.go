@@ -486,7 +486,7 @@ func (oss *OSS) prepare(req *request) error {
 		req.signpath = req.path
 
 		req.baseurl = DefaultHost
-		if oss.Region != "" && oss.Region != DefaultRegion {
+		if oss.Region != "" {
 			//			req.baseurl = fmt.Sprintf("http://%s.aliyuncs.com", oss.Region)
 			req.baseurl = fmt.Sprintf("http://%s.%s.aliyuncs.com", req.bucket, oss.Region)
 		}

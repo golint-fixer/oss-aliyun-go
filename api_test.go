@@ -47,7 +47,7 @@ func TestGet(t *testing.T) {
 		return
 	}
 	if bytes.Compare(data, testData) != 0 {
-		t.Error("Got wrong object:", err, data)
+		t.Error("Got wrong object:", err, string(data))
 	}
 }
 
@@ -64,9 +64,9 @@ func TestURL(t *testing.T) {
 		t.Error("Unable get object:", err)
 	}
 
-	d, err := ioutil.ReadAll(resp.Body)
-	if err != nil || bytes.Compare(d, testData) != 0 {
-		t.Error("Got wrong object:", err, d)
+	data, err := ioutil.ReadAll(resp.Body)
+	if err != nil || bytes.Compare(data, testData) != 0 {
+		t.Error("Got wrong object:", err, string(data))
 	}
 }
 
