@@ -1,10 +1,6 @@
 //
 // oss-aliyun-go - Go packages to interact with the Open Storage Service.
 //
-//   https://wiki.ubuntu.com/goamz
-//
-// Copyright (c) 2011 Canonical Ltd.
-//
 
 package oss
 
@@ -32,9 +28,9 @@ const (
 	HangZhou         = "oss-cn-hangzhou"
 	QingDao          = "oss-cn-qingdao"
 	HangZhouInternal = "oss-cn-hangzhou-internal"
-	QingdaoInternal  = "oss-cn-qingdao-internal"
+	QingDaoInternal  = "oss-cn-qingdao-internal"
 
-	DefaultRegion    = HangZhou
+	DefaultRegion = HangZhou
 )
 
 // The S3 type encapsulates operations with an S3 region.
