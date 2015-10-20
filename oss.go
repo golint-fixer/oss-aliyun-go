@@ -28,11 +28,13 @@ const (
 	debug       = false
 	DefaultHost = "http://oss.aliyuncs.com"
 
+	// https://docs.aliyun.com/#/pub/oss/product-documentation/domain-region
 	HangZhou         = "oss-cn-hangzhou"
 	QingDao          = "oss-cn-qingdao"
 	HangZhouInternal = "oss-cn-hangzhou-internal"
 	QingdaoInternal  = "oss-cn-qingdao-internal"
-	DefaultRegion    = "oss"
+
+	DefaultRegion    = HangZhou
 )
 
 // The S3 type encapsulates operations with an S3 region.
