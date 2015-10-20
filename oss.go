@@ -33,7 +33,7 @@ const (
 	DefaultRegion = HangZhou
 )
 
-// The S3 type encapsulates operations with an S3 region.
+// The OSS type encapsulates operations with an OSS region.
 
 type Auth struct {
 	AccessKey string
@@ -45,13 +45,13 @@ type OSS struct {
 	Region string
 }
 
-// The Bucket type encapsulates operations with an S3 bucket.
+// The Bucket type encapsulates operations with an OSS bucket.
 type Bucket struct {
 	*OSS
 	Name string
 }
 
-// The Owner type represents the owner of the object in an S3 bucket.
+// The Owner type represents the owner of the object in an OSS bucket.
 type Owner struct {
 	ID          string
 	DisplayName string
@@ -66,7 +66,7 @@ var (
 	}
 )
 
-// RetryAttempts sets whether failing S3 requests may be retried to cope
+// RetryAttempts sets whether failing OSS requests may be retried to cope
 // with eventual consistency or temporary failures. It should not be
 // called while operations are in progress.
 func RetryAttempts(retry bool) {
@@ -77,7 +77,7 @@ func RetryAttempts(retry bool) {
 	}
 }
 
-// New creates a new S3.
+// New creates a new OSS.
 func New(region, accessId, accessKey string) *OSS {
 	auth := Auth{accessId, accessKey}
 	return &OSS{auth, region}
@@ -96,10 +96,10 @@ var createBucketConfiguration = `<CreateBucketConfiguration xmlns="http://doc.os
 // required for the region.
 //
 // See http://goo.gl/bh9Kq for details.
-// func (s3 *S3) locationConstraint() io.Reader {
+// func (OSS *OSS) locationConstraint() io.Reader {
 // 	constraint := ""
-// 	if s3.Region.S3LocationConstraint {
-// 		constraint = fmt.Sprintf(createBucketConfiguration, s3.Region.Name)
+// 	if OSS.Region.OSSLocationConstraint {
+// 		constraint = fmt.Sprintf(createBucketConfiguration, OSS.Region.Name)
 // 	}
 // 	return strings.NewReader(constraint)
 // }
@@ -132,7 +132,7 @@ func (b *Bucket) PutBucket(perm ACL) error {
 	return b.OSS.query(req, nil)
 }
 
-// DelBucket removes an existing S3 bucket. All objects in the bucket must
+// DelBucket removes an existing OSS bucket. All objects in the bucket must
 // be removed before the bucket itself can be removed.
 //
 // See http://goo.gl/GoBrY for details.
@@ -151,7 +151,7 @@ func (b *Bucket) DelBucket() (err error) {
 	return err
 }
 
-// Get retrieves an object from an S3 bucket.
+// Get retrieves an object from an OSS bucket.
 //
 // See http://goo.gl/isCO7 for details.
 func (b *Bucket) Get(path string) (data []byte, err error) {
@@ -164,7 +164,7 @@ func (b *Bucket) Get(path string) (data []byte, err error) {
 	return data, err
 }
 
-// GetReader retrieves an object from an S3 bucket.
+// GetReader retrieves an object from an OSS bucket.
 // It is the caller's responsibility to call Close on rc when
 // finished reading.
 func (b *Bucket) GetReader(path string) (rc io.ReadCloser, err error) {
@@ -189,7 +189,7 @@ func (b *Bucket) GetReader(path string) (rc io.ReadCloser, err error) {
 	panic("unreachable")
 }
 
-// Put inserts an object into the S3 bucket.
+// Put inserts an object into the OSS bucket.
 //
 // See http://goo.gl/FEBPD for details.
 func (b *Bucket) Put(path string, data []byte, contType string, perm ACL) error {
@@ -197,7 +197,7 @@ func (b *Bucket) Put(path string, data []byte, contType string, perm ACL) error 
 	return b.PutReader(path, body, int64(len(data)), contType, perm)
 }
 
-// PutReader inserts an object into the S3 bucket by consuming data
+// PutReader inserts an object into the OSS bucket by consuming data
 // from r until EOF.
 func (b *Bucket) PutReader(path string, r io.Reader, length int64, contType string, perm ACL) error {
 	headers := map[string][]string{
@@ -215,7 +215,7 @@ func (b *Bucket) PutReader(path string, r io.Reader, length int64, contType stri
 	return b.OSS.query(req, nil)
 }
 
-// Del removes an object from the S3 bucket.
+// Del removes an object from the OSS bucket.
 //
 // See http://goo.gl/APeTt for details.
 func (b *Bucket) Del(path string) error {
@@ -273,7 +273,7 @@ type OwnerInfo struct {
 	DisplayName string
 }
 
-// The Key type represents an item stored in an S3 bucket.
+// The Key type represents an item stored in an OSS bucket.
 type Key struct {
 	Key          string
 	LastModified string
@@ -296,7 +296,7 @@ type Key struct {
 // into different groupings of keys, similar to how folders would work.
 //
 // The marker parameter specifies the key to start with when listing objects
-// in a bucket. Amazon S3 lists objects in alphabetical order and
+// in a bucket. aliyun OSS lists objects in alphabetical order and
 // will return keys alphabetically greater than the marker.
 //
 // The max parameter specifies how many keys + common prefixes to return in
@@ -458,7 +458,7 @@ func (oss *OSS) queryRaw(req *request) (*http.Response, error) {
 	return hresp, err
 }
 
-// prepare sets up req to be delivered to S3.
+// prepare sets up req to be delivered to OSS.
 func (oss *OSS) prepare(req *request) error {
 	if !req.prepared {
 		req.prepared = true
@@ -552,7 +552,7 @@ func (oss *OSS) run(req *request) (*http.Response, error) {
 	return hresp, err
 }
 
-// Error represents an error in an operation with S3.
+// Error represents an error in an operation with OSS.
 type Error struct {
 	StatusCode int    // HTTP status code (200, 403, ...)
 	Code       string // EC2 error code ("UnsupportedOperation", ...)
@@ -618,6 +618,6 @@ func shouldRetry(err error) bool {
 }
 
 func hasCode(err error, code string) bool {
-	s3err, ok := err.(*Error)
-	return ok && s3err.Code == code
+	osserr, ok := err.(*Error)
+	return ok && osserr.Code == code
 }
