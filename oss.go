@@ -485,7 +485,8 @@ func (oss *OSS) prepare(req *request) error {
 
 		req.baseurl = DefaultHost
 		if oss.Region != "" && oss.Region != DefaultRegion {
-			req.baseurl = fmt.Sprintf("http://%s.aliyuncs.com", oss.Region)
+			//			req.baseurl = fmt.Sprintf("http://%s.aliyuncs.com", oss.Region)
+			req.baseurl = fmt.Sprintf("http://%s.%s.aliyuncs.com", req.bucket, oss.Region)
 		}
 
 		if req.bucket != "" {
@@ -493,7 +494,7 @@ func (oss *OSS) prepare(req *request) error {
 			if strings.IndexAny(req.bucket, "/:@") >= 0 {
 				return fmt.Errorf("bad oss bucket: %q", req.bucket)
 			}
-			req.path = "/" + req.bucket + req.path
+			//			req.path = "/" + req.bucket + req.path
 			req.signpath = "/" + req.bucket + req.signpath
 		}
 	}
