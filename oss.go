@@ -29,10 +29,23 @@ const (
 	DefaultHost = "http://oss.aliyuncs.com"
 
 	// https://docs.aliyun.com/#/pub/oss/product-documentation/domain-region
-	HangZhou         = "oss-cn-hangzhou"
-	QingDao          = "oss-cn-qingdao"
-	HangZhouInternal = "oss-cn-hangzhou-internal"
-	QingDaoInternal  = "oss-cn-qingdao-internal"
+	// https://help.aliyun.com/knowledge_detail/5989609.html
+	HangZhou            = "oss-cn-hangzhou"
+	QingDao             = "oss-cn-qingdao"
+	BeiJing             = "oss-cn-beijing"
+	HongKong            = "oss-cn-hongkong"
+	ShenZhen            = "oss-cn-shenzhen"
+	ShangHai            = "oss-cn-shanghai"
+	UsWest              = "oss-us-west-1"
+	ApSouthEast         = "oss-ap-southeast-1"
+	HangZhouInternal    = "oss-cn-hangzhou-internal"
+	QingDaoInternal     = "oss-cn-qingdao-internal"
+	BeiJingInternal     = "oss-cn-beijing-internal"
+	HongKongInternal    = "oss-cn-hongkong-internal"
+	ShenZhenInternal    = "oss-cn-shenzhen-internal"
+	ShangHaiInternal    = "oss-cn-shanghai-internal"
+	UsWestInternal      = "oss-us-west-1-internal"
+	ApSouthEastInternal = "oss-ap-southeast-1-internal"
 
 	DefaultRegion = HangZhou
 )
